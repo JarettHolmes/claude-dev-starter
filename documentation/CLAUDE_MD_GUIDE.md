@@ -241,7 +241,7 @@ Full-stack web application for [purpose]. Built with React, TypeScript, Prisma, 
 
 ### Example 2: Documentary Project CLAUDE.md
 
-See `CLAUDE-example.md` in this repository for a comprehensive real-world example from a documentary project with:
+See `examples/CLAUDE-example-documentary-project.md` for a comprehensive anonymized example from a real documentary project with:
 - 530 lines of detailed routing
 - Integration with investigation workflows
 - Registry system routing
@@ -519,7 +519,7 @@ See `templates/CLAUDE.md.template` for complete template with [CUSTOMIZE] marker
 
 See `CLAUDE.md` (this repository) for reference implementation.
 
-See `CLAUDE-example.md` for real-world production example.
+See `examples/CLAUDE-example-documentary-project.md` for real-world production example.
 
 ---
 
