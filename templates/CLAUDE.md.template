@@ -12,10 +12,10 @@ Follow this router before any action. Do not explore outside the relevant README
 → Then proceed with appropriate workaround
 → Work in: [CUSTOMIZE: relevant directories]
 
-**IF** user asks about AI guides system, maintaining guides, or how to use translation/capabilities guides →
+**IF** user asks about AI guides system, PRP system, pattern recognition protocol, maintaining guides, or how to use translation/capabilities guides →
 → **Read `docs/AI_GUIDES_USAGE_SUMMARY.md` FIRST** (quick start - how system works)
 → **For maintenance**: `docs/AI_GUIDES_MAINTENANCE_PLAN.md` (when/how to update guides)
-→ **Three-command workflow** (systematic maintenance):
+→ **Three-command workflow** (systematic maintenance - also called "PRP" or Pattern Recognition Protocol):
   - `/ai-guides-discover [scope]` - Find patterns/limits/anti-patterns after completing work
   - `/ai-guides-assess [item_ids]` - Score materiality with objective framework (40 points)
   - `/ai-guides-update [item_ids]` - Execute updates with quality control
@@ -81,10 +81,15 @@ New feature request
 → Continue reading this file
 
 **AFTER completing significant work** →
-→ **Consider running**: `/ai-guides-discover conversation` to find patterns worth documenting
+→ **IMPORTANT: You SHOULD run**: `/ai-guides-discover conversation`
+→ **Always propose this to the user** after completing:
+  - Multi-step features
+  - Bug fixes that revealed patterns
+  - Any work involving repeated operations
+  - Operations that hit tool limits or required workarounds
 → **Then**: `/ai-guides-assess` to score materiality (CRITICAL items = update immediately)
-→ **Purpose**: Prevent guide staleness, capture patterns while fresh, systematic maintenance
-→ **Don't run if**: One-off task, already documented, trivial operation (<30s impact)
+→ **Purpose**: Keep guides current, capture patterns while fresh
+→ **Don't run if**: Trivial one-off tasks (<30s impact)
 
 **INTEGRATION: PRP + AI Guides**
 

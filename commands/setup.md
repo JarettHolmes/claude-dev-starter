@@ -493,7 +493,28 @@ After completion, show summary:
   ✅  All internal links valid
   ✅  PRP workspace structure complete
 
-🚀 Quick Start:
+🚀 Next Steps - Initial Population (First 2 Weeks):
+
+The guides are set up but need real patterns from YOUR project. Follow this workflow:
+
+1. **Review the generated guides** in docs/
+2. **Complete 2-3 tasks with Claude** (any normal work)
+3. **After each task, run**: `/ai-guides-discover conversation`
+4. **Then**: `/ai-guides-assess all` and `/ai-guides-update CRITICAL`
+5. **Repeat 3-4 times** until you have 15+ concept mappings
+6. **Goal**: Populate guides with real patterns in first 2 weeks
+
+📊 **Initial Population Target** (First 2 Weeks):
+   - ✅ 15+ concept mappings in Translation Guide
+   - ✅ 5+ anti-patterns documented
+   - ✅ 3+ common operations in Quick Reference
+   - ✅ Any tool limits discovered documented
+
+After initial population, switch to monthly maintenance (1st of each month).
+
+---
+
+🎯 Two Ways to Work:
 
 Option A: Document Existing Pattern (AI Guides)
   1. Complete some work
