@@ -1,0 +1,276 @@
+# CLAUDE.md Router Integration
+
+Add this to your `CLAUDE.md` file to enable automatic agent routing to guides.
+
+## Option 1: Simple Router (Recommended for Most Projects)
+
+Copy this to the **very top** of your `CLAUDE.md` file (before other instructions):
+
+```markdown
+# AGENT ROUTER
+
+**IF** task involves [CUSTOMIZE: your domain patterns] →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference for project patterns)
+→ Then read domain-specific workflow if needed
+
+**IF** task involves [CUSTOMIZE: AI tool operations] →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (capability thresholds + workarounds)
+→ Then proceed with appropriate workaround
+
+**AFTER completing significant work** →
+→ **Consider running**: `/ai-guides-discover conversation`
+→ **Then**: `/ai-guides-assess` to score materiality
+→ **Purpose**: Prevent guide staleness, capture patterns while fresh
+```
+
+### Customization Example (Web App)
+
+Replace [CUSTOMIZE] markers with your project's specific patterns:
+
+```markdown
+# AGENT ROUTER
+
+**IF** task involves database queries, API calls, state management, styling, or routing →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference for React/TypeScript patterns)
+→ Then read domain-specific workflow if needed
+
+**IF** task involves image processing, large datasets, API timeouts, or build errors →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (documented limits + workarounds)
+→ Then proceed with appropriate workaround
+
+**AFTER completing significant work** →
+→ **Consider running**: `/ai-guides-discover conversation`
+→ **Then**: `/ai-guides-assess` to score materiality
+→ **Purpose**: Prevent guide staleness, capture patterns while fresh
+```
+
+### Customization Example (API Project)
+
+```markdown
+# AGENT ROUTER
+
+**IF** task involves GraphQL resolvers, database queries, authentication, or validation →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference for API patterns)
+→ Then read domain-specific workflow if needed
+
+**IF** task involves connection pools, query performance, JWT limits, or N+1 queries →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (performance thresholds + solutions)
+→ Then proceed with appropriate workaround
+
+**AFTER completing significant work** →
+→ **Consider running**: `/ai-guides-discover conversation`
+→ **Then**: `/ai-guides-assess` to score materiality
+→ **Purpose**: Prevent guide staleness, capture patterns while fresh
+```
+
+---
+
+## Option 2: Detailed Router (For Complex Projects)
+
+For projects with multiple workflow types or complex domain separation:
+
+```markdown
+# AGENT ROUTER (EXECUTE FIRST)
+
+Follow this router before any action. Do not explore outside the relevant README.
+
+**IF** task involves [CUSTOMIZE: pattern type 1] →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference)
+→ Then read `workflows/[specific-workflow].md` if needed
+→ Work in: `[specific directories]`
+
+**IF** task involves [CUSTOMIZE: pattern type 2] →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (limits and workarounds)
+→ Then read `workflows/[specific-workflow].md` if needed
+→ Work in: `[specific directories]`
+
+**IF** task involves [CUSTOMIZE: pattern type 3] →
+→ **Open `[specific README]` and follow it**
+→ Work in: `[specific directories]`
+
+**AFTER completing significant work** →
+→ **Consider running**: `/ai-guides-discover conversation` to find patterns worth documenting
+→ **Then**: `/ai-guides-assess` to score materiality
+→ **Purpose**: Prevent guide staleness, capture patterns while fresh
+→ **Don't run if**: One-off task, already documented, trivial operation (<30s impact)
+```
+
+### Customization Example (Complex Monorepo)
+
+```markdown
+# AGENT ROUTER (EXECUTE FIRST)
+
+Follow this router before any action.
+
+**IF** task involves frontend (React components, state, API calls) →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` → Frontend Patterns** (quick reference)
+→ Then read `docs/workflows/frontend-development.md` if needed
+→ Work in: `apps/web/src/`
+
+**IF** task involves backend (GraphQL, database, auth) →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` → Backend Patterns** (quick reference)
+→ Then read `docs/workflows/backend-development.md` if needed
+→ Work in: `apps/api/src/`
+
+**IF** task involves image processing, large datasets, or external API limits →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (tested thresholds + workarounds)
+→ Then proceed with appropriate solution
+
+**IF** task involves deployment, infrastructure, or CI/CD →
+→ **Open `docs/workflows/deployment.md` and follow it**
+→ Work in: `.github/workflows/`, `infra/`
+
+**AFTER completing significant work** →
+→ **Consider running**: `/ai-guides-discover conversation`
+→ **Then**: `/ai-guides-assess` to score materiality
+→ **Purpose**: Prevent guide staleness
+```
+
+---
+
+## Placement in CLAUDE.md
+
+**Location**: Place at the **very top** of CLAUDE.md (before other instructions)
+
+**Why**: Agents should check guides FIRST before diving into comprehensive documentation or exploring codebase.
+
+**Order of operations**:
+1. Agent reads CLAUDE.md
+2. Router at top → directs to guide
+3. Agent checks guide (quick lookup)
+4. If needed, agent reads comprehensive workflow
+5. Agent executes task
+
+---
+
+## Integration Checklist
+
+Before finalizing router integration:
+
+- [ ] Router added to top of CLAUDE.md
+- [ ] File paths correct for your project structure (docs/ vs SYSTEM/docs/ vs .claude/guides/)
+- [ ] [CUSTOMIZE] markers replaced with your specific patterns
+- [ ] Router conditions specific enough (not "code" but "database queries, API calls")
+- [ ] Tested: Agent references guide when encountering known pattern
+- [ ] Router evolves as guides grow (add new patterns to router conditions)
+
+---
+
+## Validation
+
+Test the router by asking Claude to perform a task covered by your guides:
+
+### Test 1: Database Query (Translation Guide)
+
+**Ask**:
+```
+"Fetch all active users from the database"
+```
+
+**Expected behavior**:
+1. Agent reads CLAUDE.md router
+2. Router condition matches "database queries"
+3. Agent opens AI_DOMAIN_TRANSLATION_GUIDE.md
+4. Agent finds "Database query" mapping
+5. Agent uses documented pattern (e.g., Prisma findMany())
+6. Implementation works first try
+
+**If agent doesn't reference guide**:
+- Router condition too vague → make more specific
+- Pattern not in guide → add it
+- File path wrong → check docs/ path
+
+### Test 2: Capability Limit (Capabilities Guide)
+
+**Ask**:
+```
+"Process this large image file for analysis"
+```
+
+**Expected behavior**:
+1. Agent reads router
+2. Router directs to AI_CAPABILITIES_AND_LIMITS.md
+3. Agent checks for image processing limits
+4. Agent finds Vision API limit (e.g., 1568px)
+5. Agent applies workaround BEFORE hitting limit
+6. No reactive debugging needed
+
+**If agent doesn't check limit**:
+- Router condition missing "image processing"
+- Limit not documented in guide
+- Workaround not clear enough
+
+---
+
+## Common Router Mistakes
+
+### ❌ Too Generic
+
+```markdown
+**IF** task involves code →
+→ Read guide
+```
+
+**Problem**: Every task involves code, router always triggers
+
+### ❌ Too Specific
+
+```markdown
+**IF** task involves querying users table with active=true filter →
+→ Read guide
+```
+
+**Problem**: Only matches exact scenario, misses similar patterns
+
+### ✅ Just Right
+
+```markdown
+**IF** task involves database queries, API calls, or state management →
+→ Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST
+```
+
+**Why**: Specific enough to match relevant tasks, broad enough to cover variations
+
+---
+
+## Path Adjustment
+
+If your guides are NOT in `docs/`, update paths:
+
+**Guides in .claude/guides/**:
+```markdown
+→ **Read `.claude/guides/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST**
+```
+
+**Guides in SYSTEM/docs/**:
+```markdown
+→ **Read `SYSTEM/docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST**
+```
+
+**Guides in project root**:
+```markdown
+→ **Read `AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST**
+```
+
+---
+
+## Advanced: Conditional Routing
+
+For projects with different patterns by environment or module:
+
+```markdown
+**IF** task involves frontend patterns (React, state, routing) →
+→ **Read section**: `docs/AI_DOMAIN_TRANSLATION_GUIDE.md → Frontend Patterns`
+
+**IF** task involves backend patterns (API, database, auth) →
+→ **Read section**: `docs/AI_DOMAIN_TRANSLATION_GUIDE.md → Backend Patterns`
+
+**IF** task involves mobile patterns (React Native, navigation, storage) →
+→ **Read section**: `docs/AI_DOMAIN_TRANSLATION_GUIDE.md → Mobile Patterns`
+```
+
+**Benefit**: Single guide file with sections, router directs to relevant section
+
+---
+
+**Remember**: Router is the entry point. Make conditions clear, specific, and complete.
