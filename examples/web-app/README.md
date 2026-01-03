@@ -1,6 +1,6 @@
 # Web App Example
 
-This example shows how to customize the AI guides for a **React/TypeScript web application**.
+This example shows AI Guides and PRP integration for a **React/TypeScript web application**.
 
 ## Technology Stack
 
@@ -14,9 +14,25 @@ This example shows how to customize the AI guides for a **React/TypeScript web a
 - **Form Handling**: React Hook Form + Zod
 - **Data Fetching**: React Query (via tRPC)
 
+## Directory Structure
+
+```
+examples/web-app/
+├── ai-guides/                  # AI Guides snippets
+│   ├── AI_DOMAIN_TRANSLATION.snippet.md
+│   └── AI_CAPABILITIES_LIMITS.snippet.md
+├── prp/                        # PRP examples
+│   └── authentication-feature.md
+└── README.md                   # This file
+```
+
 ## What's Included
 
-### AI_DOMAIN_TRANSLATION.snippet.md
+### AI Guides (ai-guides/)
+
+Quick-reference guides documenting project patterns and tool limits.
+
+#### AI_DOMAIN_TRANSLATION.snippet.md
 
 **10 concept mappings**:
 1. Database query → Prisma ORM
@@ -43,7 +59,7 @@ This example shows how to customize the AI guides for a **React/TypeScript web a
 - Global state (Zustand)
 - Form with validation (React Hook Form + Zod)
 
-### AI_CAPABILITIES_LIMITS.snippet.md
+#### AI_CAPABILITIES_LIMITS.snippet.md
 
 **3 documented limits**:
 1. Vite error message truncation
@@ -57,16 +73,39 @@ This example shows how to customize the AI guides for a **React/TypeScript web a
 - Image optimization limits
 - LocalStorage quota
 
+### PRP Examples (prp/)
+
+Example Product Requirement Prompts showing context-rich specifications.
+
+#### authentication-feature.md (BASE PRP)
+
+Complete authentication system with JWT tokens - demonstrates:
+- **Goal/Why/What** structure with clear success criteria
+- **All Needed Context** auto-pulls patterns from AI Guides
+- **Implementation Blueprint** with phase-by-phase validation
+- **Validation Loops** at unit, integration, and manual levels
+
+**Use this as a template** for:
+- Feature development with security requirements
+- Multi-phase implementations
+- Features requiring database + API + frontend changes
+- When you need comprehensive validation
+
+**Key sections to adapt**:
+- Update tech stack references (Prisma, tRPC, Zustand)
+- Replace with your authentication approach (if not JWT)
+- Modify validation commands for your test setup
+
 ## How to Use
 
-### Step 1: Copy Snippets to Your Guides
+### Step 1: Copy AI Guides Snippets
 
 ```bash
 # From starter kit root
 cd /path/to/your/project
 
 # Copy concept mappings
-cat examples/web-app/AI_DOMAIN_TRANSLATION.snippet.md
+cat examples/web-app/ai-guides/AI_DOMAIN_TRANSLATION.snippet.md
 
 # Manually copy relevant sections to your:
 # docs/AI_DOMAIN_TRANSLATION_GUIDE.md
@@ -96,6 +135,23 @@ cat examples/web-app/AI_DOMAIN_TRANSLATION.snippet.md
 - Format: `| "Concept" | "Your Tool" | "Key Detail" |`
 - Anti-pattern format: `❌ Wrong → ✅ Right`
 - Quick reference format: Code snippet + When + Why
+
+### Step 3: Use PRP Example as Template
+
+```bash
+# Copy authentication PRP as starting point
+cp examples/web-app/prp/authentication-feature.md \
+   PRPs/in-progress/my-feature-INITIAL.md
+
+# Customize for your feature:
+# 1. Update Goal/Why/What sections
+# 2. Replace authentication logic with your feature
+# 3. Update tech stack references if different
+# 4. Modify validation criteria
+
+# Generate detailed PRP
+/prp-create PRPs/in-progress/my-feature-INITIAL.md
+```
 
 ### Step 3: Add Your Patterns
 

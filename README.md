@@ -4,13 +4,30 @@
 
 A systematic approach to AI agent instruction management for Claude Code. Package your project patterns, documented limits, and anti-patterns into quick-reference guides that agents can consult during work—preventing errors, reducing clarifying questions, and accelerating development.
 
-## What Is This?
+## What is This?
 
-This starter kit provides a **living documentation system** that sits between your comprehensive workflows and your AI agents. Instead of agents reading 50-page documents every time they encounter a database query, they consult a quick-reference guide with your exact patterns.
+A comprehensive starter kit combining two powerful methodologies for AI-driven development:
 
-**The Problem**: AI agents either (1) ask too many clarifying questions, or (2) guess wrong about your project's conventions.
+### 1. AI Guides System (Knowledge Layer)
+Document your project's patterns, conventions, and tool limits as quick-reference guides that AI agents consult during work. Prevents repetitive questions and incorrect assumptions.
 
-**The Solution**: Two complementary guides + systematic maintenance workflow.
+**Key features:**
+- Domain translation (generic concepts → your specific patterns)
+- Capability limits documentation (thresholds + workarounds)
+- Systematic maintenance workflow (discover → assess → update)
+- Monthly validation checks
+
+### 2. PRP Methodology (Execution Layer)
+Create context-rich specifications (Product Requirement Prompts) that enable one-pass implementation success with built-in validation loops.
+
+**Key features:**
+- 4 PRP types (PLANNING, BASE, SPEC, TASK)
+- Deep agentic research phase
+- Auto-integration with AI Guides patterns
+- Multi-level validation loops
+- Proven for complex features (auth, payments, real-time, etc.)
+
+**How they work together:** AI Guides teach Claude your patterns once. PRPs use those patterns to build features without errors.
 
 ## Quick Start
 
@@ -23,12 +40,12 @@ This starter kit provides a **living documentation system** that sits between yo
 
 2. **Run setup command in Claude Code**
    ```
-   /setup-ai-guides
+   /setup
    ```
    Claude will:
-   - Analyze your codebase and detect tech stack
-   - Populate templates with your project's patterns
-   - Create directory structure
+   - Create AI Guides system (docs/ directory with 4 guides)
+   - Create PRP workspace (PRPs/ directory with templates)
+   - Detect tech stack and populate initial patterns
    - Add router to CLAUDE.md
    - Run validation
 
@@ -66,13 +83,23 @@ This starter kit provides a **living documentation system** that sits between yo
 - Tested workarounds (when to apply them)
 - Future testing backlog (capability hypotheses to validate)
 
-### ⚙️ 12 Development Commands
+### ⚙️ 20 Development Commands
 
 **4 AI Guides Commands** - Setup and systematic maintenance:
-- `/setup-ai-guides` - Interactive bootstrap for your project (run once)
+- `/setup` - Bootstrap complete system (PRP + AI Guides)
 - `/ai-guides-discover` - Find patterns/limits/anti-patterns from recent work
 - `/ai-guides-assess` - Score materiality with 40-point objective framework
 - `/ai-guides-update` - Execute guide updates with quality control
+
+**8 PRP Commands** - Create and execute context-rich specifications:
+- `/prp-planning-create` - Rough idea → Comprehensive PRD
+- `/prp-create` - Requirements → Detailed PRP
+- `/prp-base-execute` - Execute BASE PRP with validation
+- `/prp-spec-execute` - Execute SPEC PRP (transformations)
+- `/prp-task-execute` - Execute TASK PRP (checklists)
+- `/task-list-init` - Create task checklist
+- `/api-contract-define` - Define API contracts
+- `/read-docs` - Load project context documents
 
 **8 Development Commands** - Productivity tools:
 - `/smart-commit` - Analyze changes and create intelligent commits
@@ -92,7 +119,7 @@ Realistic patterns for:
 - **Mobile App** (React Native, Expo, AsyncStorage, Navigation)
 - **Data Science** (Python, Jupyter, Pandas, Scikit-learn, Plotly)
 
-Each includes concept mappings, anti-patterns, and capability limits.
+Each includes AI Guide snippets (concept mappings, anti-patterns, capability limits) and PRP examples (authentication, migrations, pipelines).
 
 ### ✅ Validation Infrastructure
 
@@ -104,13 +131,22 @@ Each includes concept mappings, anti-patterns, and capability limits.
 
 ```
 claude-dev-starter/
-├── templates/              # 4 guide templates with [CUSTOMIZE] markers
-│   ├── AI_DOMAIN_TRANSLATION_GUIDE.md
-│   ├── AI_CAPABILITIES_AND_LIMITS.md
-│   ├── AI_GUIDES_USAGE_SUMMARY.md
-│   └── AI_GUIDES_MAINTENANCE_PLAN.md
-├── commands/               # 11 Claude Code commands
-│   ├── ai-guides/          # 3 maintenance commands
+├── templates/              # 8 templates with [CUSTOMIZE] markers
+│   ├── ai-guides/          # 4 AI Guide templates
+│   │   ├── AI_DOMAIN_TRANSLATION_GUIDE.md
+│   │   ├── AI_CAPABILITIES_AND_LIMITS.md
+│   │   ├── AI_GUIDES_USAGE_SUMMARY.md
+│   │   └── AI_GUIDES_MAINTENANCE_PLAN.md
+│   ├── prp/                # 4 PRP templates
+│   │   ├── prp.md (BASE)
+│   │   ├── prp_planning.md
+│   │   ├── prp_spec.md
+│   │   └── prp_task.md
+│   └── CLAUDE.md.template  # Master router template
+├── commands/               # 20 Claude Code commands
+│   ├── setup.md            # Bootstrap both systems
+│   ├── ai-guides/          # 3 AI Guides maintenance commands
+│   ├── prp/                # 8 PRP commands
 │   └── development/        # 8 productivity commands
 ├── tools/                  # Validation script
 │   └── validate_ai_guides.sh

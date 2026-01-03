@@ -165,12 +165,72 @@ else
 fi
 echo ""
 
+# Check 7: PRP Workspace Structure (if PRPs/ exists)
+echo "📁 PRP Workspace"
+echo "----------------"
+
+prp_issues=0
+
+if [ -d "PRPs" ]; then
+  # Check directory structure
+  if [ -d "PRPs/in-progress" ] && [ -d "PRPs/completed" ]; then
+    echo "✅ PRP workspace structure exists"
+  else
+    echo "⚠️  PRP workspace incomplete (missing in-progress or completed directories)"
+    prp_issues=$((prp_issues + 1))
+  fi
+
+  # Check for PRP templates
+  if [ -d "PRPs/in-progress/.templates" ]; then
+    template_count=$(ls -1 PRPs/in-progress/.templates/*.md 2>/dev/null | wc -l | tr -d ' ')
+    if [ "$template_count" -eq 4 ]; then
+      echo "✅ All 4 PRP templates present"
+    else
+      echo "⚠️  Expected 4 PRP templates, found $template_count"
+      prp_issues=$((prp_issues + 1))
+    fi
+  else
+    echo "⚠️  PRP templates directory not found"
+    prp_issues=$((prp_issues + 1))
+  fi
+
+  # Check for PRPs README
+  if [ -f "PRPs/README.md" ]; then
+    echo "✅ PRPs/README.md exists"
+  else
+    echo "⚠️  PRPs/README.md missing"
+    prp_issues=$((prp_issues + 1))
+  fi
+
+  # Count active PRPs
+  active_prps=$(find PRPs/in-progress -maxdepth 1 -name "*.md" ! -name "README.md" 2>/dev/null | wc -l | tr -d ' ')
+  completed_prps=$(find PRPs/completed -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+
+  echo "📊 Active PRPs: $active_prps"
+  echo "📊 Completed PRPs: $completed_prps"
+
+  if [ "$active_prps" -gt 5 ]; then
+    echo "💡 Consider archiving completed PRPs (>5 active)"
+  fi
+else
+  echo "ℹ️  PRP workspace not set up (PRPs/ directory not found)"
+  echo "   Run /setup to create PRP workspace"
+fi
+echo ""
+
 # Summary
 echo "=== Summary ==="
-echo "Content: $mappings mappings, $antipatterns anti-patterns"
-echo "Links: $broken_links broken"
-echo "Testing backlog: $total_backlog items"
-echo "Customization: $((customize_markers_translation + customize_markers_capabilities)) markers remaining"
+echo "AI Guides:"
+echo "  - Content: $mappings mappings, $antipatterns anti-patterns"
+echo "  - Links: $broken_links broken"
+echo "  - Testing backlog: $total_backlog items"
+echo "  - Customization: $((customize_markers_translation + customize_markers_capabilities)) markers remaining"
+if [ -d "PRPs" ]; then
+  echo "PRP Workspace:"
+  echo "  - Active PRPs: ${active_prps:-0}"
+  echo "  - Completed PRPs: ${completed_prps:-0}"
+  echo "  - Issues: ${prp_issues:-0}"
+fi
 echo ""
 
 if [ "$broken_links" -gt 0 ] || [ "$mappings" -lt "$MIN_MAPPINGS" ] || [ "$antipatterns" -lt "$MIN_ANTIPATTERNS" ]; then
@@ -182,11 +242,18 @@ if [ "$broken_links" -gt 0 ] || [ "$mappings" -lt "$MIN_MAPPINGS" ] || [ "$antip
 fi
 
 echo "Next steps:"
-echo "1. Fix any broken links"
-echo "2. Complete 3 capability tests this quarter"
-echo "3. Update guides if workflows changed recently"
+echo "AI Guides:"
+echo "  1. Fix any broken links"
+echo "  2. Complete 3 capability tests this quarter"
+echo "  3. Update guides if workflows changed recently"
 if [ "$((customize_markers_translation + customize_markers_capabilities))" -gt 0 ]; then
-  echo "4. Replace remaining [CUSTOMIZE] markers with project-specific content"
+  echo "  4. Replace remaining [CUSTOMIZE] markers with project-specific content"
+fi
+if [ -d "PRPs" ] && [ "${prp_issues:-0}" -gt 0 ]; then
+  echo "PRP Workspace:"
+  echo "  1. Ensure all 4 templates are present"
+  echo "  2. Create PRPs/README.md if missing"
+  echo "  3. Archive completed PRPs if >5 active"
 fi
 echo ""
 echo "Validation complete: $(date +%Y-%m-%d)"

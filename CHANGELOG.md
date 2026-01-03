@@ -8,29 +8,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial release with full development suite
-- 4 guide templates (Domain Translation, Capabilities & Limits, Usage Summary, Maintenance Plan)
-- 11 development commands (3 AI guides + 8 dev tools)
-- Configurable validation script with 6 quality checks
-- 4 multi-domain examples (web-app, api-project, mobile-app, data-science)
-- RLA documentary example (real-world reference implementation)
-- Comprehensive documentation (Architecture, Customization, Success Metrics, FAQ)
-- GitHub integration (issue templates, PR template, CONTRIBUTING.md)
-- Router integration snippet for CLAUDE.md
-- Validation scenarios template
-- Complete setup guide (<30 minute basic setup)
-- Monthly maintenance workflow
-- 40-point materiality scoring framework
-- Success metrics tracking framework
+- **PRP Methodology Integration** - Complete Progressive Refinement Plan system
+  - 8 new PRP commands (prp-create, prp-base-execute, prp-spec-execute, prp-task-execute, etc.)
+  - 4 PRP templates (BASE, PLANNING, SPEC, TASK) in templates/prp/
+  - Auto-integration between PRP creation and AI Guides patterns
+  - PRP workspace structure (PRPs/in-progress, PRPs/completed, .templates)
+- **INTEGRATION_GUIDE.md** - Comprehensive guide for using both systems together
+  - Decision tree for which system to use when
+  - Complete workflow examples (OAuth, database migration)
+  - Monthly maintenance ritual combining both systems
+  - Success metrics and troubleshooting
+- **Enhanced Examples** - All 4 domain examples now include:
+  - ai-guides/ subdirectory with pattern snippets
+  - prp/ subdirectory with example PRPs
+  - web-app: authentication-feature.md (BASE PRP)
+  - api-project: database-migration.md (SPEC PRP)
+  - Updated READMEs explaining both systems
+- **Validation Enhancements**:
+  - PRP workspace checks in validate_ai_guides.sh
+  - examples/validation-scenarios.md with 6 test scenarios
+  - Performance validation metrics
+  - Error recovery procedures
+- **Enhanced Documentation**:
+  - commands/README.md documenting all 20 commands
+  - Updated README.md with two-system overview
+  - Updated WALKTHROUGH.md with "Two Systems" section
+  - Updated CLAUDE.md template with PRP routing
 
 ### Changed
-- N/A (initial release)
+- **BREAKING**: `/setup-ai-guides` command renamed to `/setup`
+  - Now creates both AI Guides system and PRP workspace
+  - Enhanced with PRP template installation
+  - Updated all documentation references
+- **Template Reorganization**:
+  - Moved AI Guides templates to templates/ai-guides/
+  - Added templates/prp/ for PRP templates
+  - CLAUDE.md.template now includes PRP routing logic
+- **Command Library Expansion**: 11 commands → 20 commands
+  - AI Guides: 4 commands (setup, discover, assess, update)
+  - PRP: 8 commands (new)
+  - Development: 8 commands (existing)
+- **Validation Script**: Now checks both AI Guides and PRP workspace
+  - Validates PRP directory structure
+  - Counts active vs completed PRPs
+  - Checks for all 4 PRP templates
+  - Unified summary for both systems
 
 ### Fixed
-- N/A (initial release)
+- N/A (first major release with PRP integration)
 
 ### Removed
-- N/A (initial release)
+- N/A (all previous features retained)
 
 ---
 

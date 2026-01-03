@@ -31,6 +31,35 @@ Sound familiar? Yeah. **That's what this fixes.**
 
 ---
 
+## The Complete Solution: Two Systems
+
+This starter kit solves the problem with two integrated systems:
+
+### System 1: AI Guides (Prevent Repetition)
+**Problem it solves:** "I keep answering the same questions about how we do database queries"
+
+**Solution:** Document once, reference forever
+- Capture patterns in quick-reference guides
+- AI consults guides automatically via CLAUDE.md router
+- Update systematically when patterns change
+
+**Result:** 60% fewer clarifying questions, 40% faster common operations
+
+### System 2: PRP (Prevent Errors)
+**Problem it solves:** "Claude makes assumptions and implements wrong patterns"
+
+**Solution:** Context-rich specifications with validation
+- Create detailed PRPs with all needed context
+- Auto-pull patterns from AI Guides
+- Built-in validation loops at every step
+- Proven templates for common features
+
+**Result:** 80% one-pass success rate, comprehensive validation
+
+**Together:** Capture patterns (AI Guides) → Use in specs (PRP) → Build correctly → Document learnings (AI Guides) → Repeat
+
+---
+
 ## The Solution (Show, Don't Tell)
 
 Let me show you what goes in your guide. This is an actual example from the web-app template:

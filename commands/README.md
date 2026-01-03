@@ -1,6 +1,6 @@
-# Development Commands
+# Command Library
 
-This directory contains 12 Claude Code commands for systematic development workflow management.
+This starter kit includes 20 commands organized in 3 categories.
 
 ## Command Categories
 
@@ -8,9 +8,9 @@ This directory contains 12 Claude Code commands for systematic development workf
 
 Commands for setting up and maintaining the AI guides system through systematic discovery, assessment, and updates.
 
-#### `/setup-ai-guides [mode]`
+#### `/setup [mode]`
 
-**Purpose**: Bootstrap the AI guides system for your project with interactive setup
+**Purpose**: Bootstrap complete system (PRP + AI Guides) for your project with interactive setup
 
 **When to use**:
 - **First time setup** - When adding AI guides to your project
@@ -23,31 +23,31 @@ Commands for setting up and maintaining the AI guides system through systematic 
 - `minimal` - Basic templates only, manual customization
 
 **What it does**:
-1. Analyzes your codebase to detect tech stack
-2. Selects best-matching domain example
-3. Populates templates with your project's patterns
-4. Creates directory structure
-5. Adds router integration to CLAUDE.md
-6. Installs commands (discover, assess, update)
-7. Runs first validation check
+1. Creates AI Guides system (docs/ directory with 4 guides)
+2. Creates PRP workspace (PRPs/ directory with templates)
+3. Detects tech stack and populates initial patterns
+4. Adds router integration to CLAUDE.md
+5. Installs all commands (AI Guides + PRP + Development)
+6. Runs validation check
 
 **Example**:
 ```
-/setup-ai-guides
+/setup
 
 # Claude asks about your project
 "Is this a new project or existing codebase?"
 "What's your tech stack? (detected: React, Prisma, tRPC)"
-"Where should guides live? (default: docs/)"
+"Where should guides and PRPs live? (default: docs/ and PRPs/)"
 
 # Claude sets up everything
-✅ Created 4 guide files in docs/
+✅ Created 4 AI guide files in docs/
+✅ Created PRP workspace with 4 templates
 ✅ Populated 15 concept mappings from your code
 ✅ Added router to CLAUDE.md
-✅ Installed 3 maintenance commands
+✅ Installed 20 commands
 ✅ Validation passed
 
-# System ready to use!
+# Both systems ready to use!
 ```
 
 **Run this ONCE per project.** After setup, use the maintenance commands below.
@@ -166,6 +166,117 @@ Approve? (yes/no)
 ✅ Validation passed
 ✅ Git commit created
 ```
+
+---
+
+### PRP Commands (8)
+
+Commands for creating and executing context-rich Product Requirement Prompts with built-in validation.
+
+#### `/prp-planning-create [idea]`
+
+**Purpose**: Transform rough idea into comprehensive PRD through agentic research
+
+**When to use**: Complex features needing thorough research and planning
+
+**Features**:
+- Deep codebase analysis
+- API/library documentation research
+- Competitive analysis
+- Risk assessment
+- Comprehensive requirements doc
+
+---
+
+#### `/prp-create [INITIAL.md]`
+
+**Purpose**: Generate detailed PRP from requirements file (auto-pulls AI Guide patterns)
+
+**When to use**: After creating INITIAL.md with feature requirements
+
+**Features**:
+- Auto-references AI Guides patterns
+- Creates comprehensive "All Needed Context" section
+- Includes validation loops
+- Generates implementation blueprint
+
+**Example**:
+```
+/prp-create PRPs/in-progress/auth-feature-INITIAL.md
+
+# Generates detailed PRP with:
+✅ Your project's database patterns (from AI Guides)
+✅ API patterns (from AI Guides)
+✅ Known gotchas and workarounds
+✅ Validation criteria
+✅ Implementation steps
+```
+
+---
+
+#### `/prp-base-execute [prp-file]`
+
+**Purpose**: Execute BASE PRP with multi-level validation loops
+
+**When to use**: Standard feature implementation from PRP
+
+**Features**:
+- Step-by-step implementation
+- Validation at each step
+- Self-correction on errors
+- Progress tracking
+
+---
+
+#### `/prp-spec-execute [spec-file]`
+
+**Purpose**: Execute SPEC PRP for transformations (migrations, refactors)
+
+**When to use**: Database migrations, framework upgrades, large refactors
+
+**Features**:
+- Systematic transformation
+- Rollback on failure
+- Data preservation checks
+- Migration validation
+
+---
+
+#### `/prp-task-execute [task-file]`
+
+**Purpose**: Execute TASK PRP with checklist-based workflow
+
+**When to use**: Multi-phase features, complex deployments
+
+---
+
+#### `/task-list-init [description]`
+
+**Purpose**: Create task checklist for breaking down complex work
+
+**When to use**: Starting multi-step features or projects
+
+---
+
+#### `/api-contract-define [feature]`
+
+**Purpose**: Define API contracts before implementation
+
+**When to use**: API-first development, frontend-backend coordination
+
+---
+
+#### `/read-docs`
+
+**Purpose**: Load project context documents into agent memory
+
+**When to use**: Start of session, after context loss, before major work
+
+**Features**:
+- Loads AI Guides
+- Loads relevant PRPs
+- Loads architecture docs
+- Sets full project context
 
 ---
 
@@ -340,8 +451,8 @@ If you need to modify:
 ### Initial Setup (One Time)
 
 ```
-1. /setup-ai-guides
-2. Review generated guides
+1. /setup
+2. Review generated guides and PRP templates
 3. Test with a sample task
 4. Customize as needed
 ```
@@ -355,13 +466,26 @@ If you need to modify:
 4. Run validation: bash tools/validate_ai_guides.sh
 ```
 
-### Feature Development
+### Feature Development (with PRP)
+
+```
+1. Create PRPs/in-progress/INITIAL.md with requirements
+2. /prp-create PRPs/in-progress/INITIAL.md
+3. Review generated PRP
+4. /prp-base-execute [prp-file]
+5. /ai-guides-discover conversation  # Document learnings
+6. /smart-commit
+7. /create-pr
+```
+
+### Simple Feature Development (no PRP)
 
 ```
 1. /new-dev-branch
 2. [Do work]
 3. /smart-commit
 4. /create-pr
+5. /ai-guides-discover conversation  # If pattern worth documenting
 ```
 
 ### After Discovering Pattern
