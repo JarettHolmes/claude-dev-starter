@@ -1,0 +1,153 @@
+# AGENT ROUTER (EXECUTE FIRST)
+
+Follow this router before any action. Do not explore outside the relevant README.
+
+**IF** task involves [CUSTOMIZE: your common patterns - e.g., "database queries, API calls, form validation"] →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference for project patterns)
+→ Then read domain-specific documentation if needed
+→ Work in: [CUSTOMIZE: relevant directories]
+
+**IF** task involves [CUSTOMIZE: known limitations - e.g., "image processing, API timeouts, large file operations"] →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (capability thresholds + workarounds)
+→ Then proceed with appropriate workaround
+→ Work in: [CUSTOMIZE: relevant directories]
+
+**IF** user asks about AI guides system, maintaining guides, or how to use translation/capabilities guides →
+→ **Read `docs/AI_GUIDES_USAGE_SUMMARY.md` FIRST** (quick start - how system works)
+→ **For maintenance**: `docs/AI_GUIDES_MAINTENANCE_PLAN.md` (when/how to update guides)
+→ **Three-command workflow** (systematic maintenance):
+  - `/ai-guides-discover [scope]` - Find patterns/limits/anti-patterns after completing work
+  - `/ai-guides-assess [item_ids]` - Score materiality with objective framework (40 points)
+  - `/ai-guides-update [item_ids]` - Execute updates with quality control
+  - See: AI_GUIDES_MAINTENANCE_PLAN.md → "Operational Maintenance Workflow" section
+→ **For validation**: Run `bash tools/validate_ai_guides.sh` (monthly health check)
+→ **The two guides**:
+  - `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` - Quick pattern lookup
+  - `docs/AI_CAPABILITIES_AND_LIMITS.md` - Tool limits and workarounds
+→ **Key insight**: Guides are living documents - update when workflows change (monthly validation required)
+
+[CUSTOMIZE: Add your domain-specific routing rules below]
+
+**IF** task mentions [CUSTOMIZE: domain 1 keywords - e.g., "authentication, users, sessions"] →
+→ **Open `[CUSTOMIZE: path/to/README.md]`** and follow it
+→ Work in: [CUSTOMIZE: relevant directories]
+
+**IF** task mentions [CUSTOMIZE: domain 2 keywords - e.g., "API endpoints, routes, controllers"] →
+→ **Open `[CUSTOMIZE: path/to/README.md]`** and follow it
+→ Work in: [CUSTOMIZE: relevant directories]
+
+**IF** task mentions [CUSTOMIZE: domain 3 keywords - e.g., "components, UI, styling"] →
+→ **Open `[CUSTOMIZE: path/to/README.md]`** and follow it
+→ Work in: [CUSTOMIZE: relevant directories]
+
+**IF** general/exploratory task →
+→ Continue reading this file
+
+**AFTER completing significant work** →
+→ **Consider running**: `/ai-guides-discover conversation` to find patterns worth documenting
+→ **Then**: `/ai-guides-assess` to score materiality (CRITICAL items = update immediately)
+→ **Purpose**: Prevent guide staleness, capture patterns while fresh, systematic maintenance
+→ **Don't run if**: One-off task, already documented, trivial operation (<30s impact)
+
+**ALWAYS respect repo rules**:
+[CUSTOMIZE: Add your project-specific rules - e.g., "No secrets in git", "Always run tests before commit"]
+
+---
+
+# CLAUDE.md
+
+Agent instructions for working in [CUSTOMIZE: your project name].
+
+## Project Mission
+
+[CUSTOMIZE: Brief description of what this project is and what it does]
+
+---
+
+## Critical Standards
+
+### [CUSTOMIZE: Standard 1 - e.g., "TypeScript Standards"]
+
+[CUSTOMIZE: Key standards your project follows]
+
+### [CUSTOMIZE: Standard 2 - e.g., "Testing Requirements"]
+
+[CUSTOMIZE: Testing approach, coverage requirements, etc.]
+
+### Repository Rules
+
+[CUSTOMIZE: Add your repository rules - e.g., "Never commit node_modules", "All PRs require review"]
+
+---
+
+## Repository Structure
+
+```
+[CUSTOMIZE: Add your project structure]
+project-root/
+├── src/
+│   ├── components/
+│   ├── pages/
+│   └── utils/
+├── tests/
+├── docs/
+│   ├── AI_DOMAIN_TRANSLATION_GUIDE.md
+│   ├── AI_CAPABILITIES_AND_LIMITS.md
+│   └── [other docs]
+└── [other directories]
+```
+
+---
+
+## Architecture Principles
+
+[CUSTOMIZE: Key architectural decisions and principles]
+
+**Example principles:**
+- Separation of concerns
+- Single responsibility
+- DRY (Don't Repeat Yourself)
+- Test coverage requirements
+
+---
+
+## Standard Workflows
+
+**[CUSTOMIZE: Workflow 1 - e.g., "Adding a New Feature"]**:
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+**[CUSTOMIZE: Workflow 2 - e.g., "Fixing a Bug"]**:
+1. [Step 1]
+2. [Step 2]
+3. [Step 3]
+
+---
+
+## Command System
+
+**Available Commands**:
+```bash
+/ai-guides-discover [scope]    # Find patterns from recent work
+/ai-guides-assess [item_ids]   # Score materiality
+/ai-guides-update [item_ids]   # Update guides
+[CUSTOMIZE: Add your custom commands]
+```
+
+---
+
+## Critical Documents
+
+### Master Context Files
+- `README.md` - Project overview (human onboarding)
+- `CLAUDE.md` - This file (agent instructions)
+- [CUSTOMIZE: Add your critical documentation files]
+
+---
+
+**When in doubt**:
+1. Check router at top of this file for correct README
+2. Check if command exists (`.claude/commands/`)
+3. Read relevant domain documentation
+4. Consult AI guides for established patterns

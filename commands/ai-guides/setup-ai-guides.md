@@ -167,30 +167,182 @@ mkdir -p [USER_SPECIFIED_PATH]/
 # AI_GUIDES_MAINTENANCE_PLAN.md
 ```
 
-### Step 6: Router Integration
+### Step 6: CLAUDE.md Integration
 
-Add to CLAUDE.md (create if doesn't exist):
+**CRITICAL**: CLAUDE.md serves as the master router + project context. It routes agents to domain-specific READMEs and specialized knowledge based on task keywords.
 
+#### Scenario A: CLAUDE.md Does Not Exist
+
+Create from template (`templates/CLAUDE.md.template`) with populated values:
+
+1. **Detect common patterns** from codebase scan:
+   - Database operations → "database queries, ORM operations, migrations"
+   - API patterns → "API calls, endpoints, routes, HTTP requests"
+   - Frontend → "components, UI, styling, forms"
+   - State → "state management, stores, context"
+
+2. **Create AGENT ROUTER section** with AI guides integrated:
 ```markdown
-# AGENT ROUTER
+# AGENT ROUTER (EXECUTE FIRST)
 
-**IF** task involves [DETECTED_PATTERNS: database queries, API calls, state management] →
-→ **Read `[GUIDES_PATH]/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference)
+Follow this router before any action. Do not explore outside the relevant README.
 
-**IF** task involves image processing, API timeouts, or new libraries →
-→ **Check `[GUIDES_PATH]/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (limits and workarounds)
+**IF** task involves [DETECTED: database queries, API calls, form validation] →
+→ **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference for project patterns)
+→ Then read domain-specific documentation if needed
+→ Work in: [DETECTED_DIRS: src/db/, src/api/, src/components/forms/]
+
+**IF** task involves [DETECTED: image processing, API timeouts, file uploads] →
+→ **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (capability thresholds + workarounds)
+→ Then proceed with appropriate workaround
+→ Work in: [DETECTED_DIRS: src/utils/, src/services/]
+
+**IF** user asks about AI guides system, maintaining guides, or how to use translation/capabilities guides →
+→ **Read `docs/AI_GUIDES_USAGE_SUMMARY.md` FIRST** (quick start - how system works)
+→ **For maintenance**: `docs/AI_GUIDES_MAINTENANCE_PLAN.md` (when/how to update guides)
+→ **Three-command workflow** (systematic maintenance):
+  - `/ai-guides-discover [scope]` - Find patterns/limits/anti-patterns after completing work
+  - `/ai-guides-assess [item_ids]` - Score materiality with objective framework (40 points)
+  - `/ai-guides-update [item_ids]` - Execute updates with quality control
 
 **AFTER completing significant work** →
 → **Consider running**: `/ai-guides-discover conversation`
-→ **Then**: `/ai-guides-assess` to score materiality
 → **Purpose**: Prevent guide staleness, capture patterns while fresh
+
+---
+
+# CLAUDE.md
+
+Agent instructions for working in [PROJECT_NAME].
+
+## Project Mission
+
+[BRIEF_DESCRIPTION based on README.md or package.json description]
+
+## Critical Standards
+
+### [DETECTED_TECH_STACK]
+- Framework: [React/Vue/Next.js/Django/Flask/etc.]
+- Language: [TypeScript/JavaScript/Python/etc.]
+- Database: [PostgreSQL/MySQL/MongoDB/etc.]
+- Testing: [Jest/pytest/etc.]
+
+[Continue with template sections...]
 ```
 
-If CLAUDE.md already exists, ask before modifying:
+3. **Populate with detected tech stack** - Replace [CUSTOMIZE] markers with actual findings
+
+4. **Ask user to review**:
 ```
-Found existing CLAUDE.md. Add router integration at the top? (y/n)
-If no, I'll create a separate AI_GUIDES_ROUTER.md you can merge manually.
+Created CLAUDE.md with detected tech stack and AI guides integration.
+Please review and customize:
+- Project mission section
+- Critical standards
+- Domain-specific routing rules
+
+Open CLAUDE.md now for review? (y/n)
 ```
+
+#### Scenario B: CLAUDE.md Already Exists
+
+**DO NOT overwrite existing content**. Intelligently update:
+
+1. **Parse existing CLAUDE.md**:
+   - Identify if "AGENT ROUTER" section exists
+   - Identify if AI guides routing already present
+   - Preserve ALL existing routing rules
+   - Preserve ALL project context
+
+2. **Update router section**:
+
+   **If "AGENT ROUTER" section exists**:
+   - Insert AI guides routing rules at appropriate position (after domain-specific, before general)
+   - Check if AI guides rules already exist (don't duplicate)
+   - Preserve all existing IF statements
+   - Maintain exact formatting
+
+   Example insertion:
+   ```markdown
+   [EXISTING ROUTING RULES...]
+
+   **IF** task involves [DETECTED: your patterns] →
+   → **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST** (quick reference)
+
+   **IF** task involves [DETECTED: limitations] →
+   → **Check `docs/AI_CAPABILITIES_AND_LIMITS.md` FIRST** (limits + workarounds)
+
+   **IF** user asks about AI guides system →
+   → **Read `docs/AI_GUIDES_USAGE_SUMMARY.md` FIRST**
+
+   [CONTINUE WITH EXISTING RULES...]
+
+   **AFTER completing significant work** →
+   → **Consider running**: `/ai-guides-discover conversation`
+   ```
+
+   **If "AGENT ROUTER" section does NOT exist**:
+   - Create it at the very top of the file
+   - Add AI guides routing
+   - Preserve all existing content below
+
+3. **Show diff before applying**:
+```
+Found existing CLAUDE.md (XXX lines).
+
+Proposed changes:
++ Line 15: Add AI guides routing for database/API/state patterns
++ Line 23: Add AI guides system usage routing
++ Line 145: Add post-work discovery reminder
+
+Existing routing rules preserved:
+✓ Lines 5-12: Domain-specific routing (unchanged)
+✓ Lines 50-120: Project context (unchanged)
+
+Apply these changes? (y/n/show-full-diff)
+```
+
+4. **Backup before modifying**:
+```bash
+# Create backup
+cp CLAUDE.md CLAUDE.md.backup-$(date +%Y%m%d-%H%M%S)
+
+# Apply changes
+[Insert AI guides routing]
+
+# Validate
+✓ All existing routing rules preserved
+✓ AI guides routing added
+✓ No content lost
+```
+
+5. **Alternative if user declines**:
+```
+Understood. I've created AI_GUIDES_ROUTER.snippet with the routing rules.
+You can manually merge this into CLAUDE.md when ready.
+
+File created: docs/AI_GUIDES_ROUTER.snippet
+```
+
+#### Router Integration Best Practices
+
+**Detection Logic**:
+- Scan package.json, requirements.txt, Gemfile, etc. for dependencies
+- Identify framework-specific patterns (React hooks, Django views, etc.)
+- Find common operations (database queries, API calls, file operations)
+- Map to routing keywords
+
+**Routing Keywords Selection**:
+- Use actual terms from the codebase
+- Include synonyms (e.g., "database queries, ORM operations, DB calls")
+- Be specific enough to route correctly
+- Broad enough to catch related tasks
+
+**Integration with Existing Routers**:
+- AI guides routing should complement, not replace existing rules
+- Place AI guides rules at appropriate specificity level
+- More specific domain rules come first
+- AI guides provide cross-cutting patterns
+- General/exploratory rules come last
 
 ### Step 7: Commands Setup
 
