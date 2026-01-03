@@ -14,31 +14,43 @@ This starter kit provides a **living documentation system** that sits between yo
 
 ## Quick Start
 
+### Automated Setup (Recommended)
+
+1. **Copy commands to your project**
+   ```bash
+   cp -r commands/ /path/to/your/project/.claude/commands/
+   ```
+
+2. **Run setup command in Claude Code**
+   ```
+   /setup-ai-guides
+   ```
+   Claude will:
+   - Analyze your codebase and detect tech stack
+   - Populate templates with your project's patterns
+   - Create directory structure
+   - Add router to CLAUDE.md
+   - Run validation
+
+**Time to setup**: ~10 minutes with Claude's help
+
+### Manual Setup (Alternative)
+
 1. **Clone this repository**
    ```bash
    git clone [URL]
    cd claude-dev-starter
    ```
 
-2. **Copy commands to your project**
-   ```bash
-   cp -r commands/ /path/to/your/project/.claude/commands/
-   ```
-
-3. **Customize template guides**
+2. **Customize template guides**
    - Choose a domain example: `examples/web-app/`, `api-project/`, `mobile-app/`, or `data-science/`
    - Fill in templates with your project patterns (see `SETUP_GUIDE.md`)
+   - Copy to your project's `docs/` directory
 
-4. **Add router integration to CLAUDE.md**
+3. **Add router integration to CLAUDE.md**
    - Use snippet from `examples/CLAUDE.md.snippet`
-   - Directs agents to guides for quick lookups
 
-5. **Test with validation script**
-   ```bash
-   bash tools/validate_ai_guides.sh path/to/your/guides
-   ```
-
-**Time to setup**: <30 minutes for basic setup, 2-3 hours to fully customize guides
+**Time to setup**: 30 minutes to 2 hours depending on customization
 
 ## What's Included
 
@@ -54,9 +66,10 @@ This starter kit provides a **living documentation system** that sits between yo
 - Tested workarounds (when to apply them)
 - Future testing backlog (capability hypotheses to validate)
 
-### ⚙️ 11 Development Commands
+### ⚙️ 12 Development Commands
 
-**3 AI Guides Commands** - Systematic maintenance workflow:
+**4 AI Guides Commands** - Setup and systematic maintenance:
+- `/setup-ai-guides` - Interactive bootstrap for your project (run once)
 - `/ai-guides-discover` - Find patterns/limits/anti-patterns from recent work
 - `/ai-guides-assess` - Score materiality with 40-point objective framework
 - `/ai-guides-update` - Execute guide updates with quality control

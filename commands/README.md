@@ -1,12 +1,58 @@
 # Development Commands
 
-This directory contains 11 Claude Code commands for systematic development workflow management.
+This directory contains 12 Claude Code commands for systematic development workflow management.
 
 ## Command Categories
 
-### AI Guides Commands (3)
+### AI Guides Commands (4)
 
-Commands for maintaining the AI guides system through systematic discovery, assessment, and updates.
+Commands for setting up and maintaining the AI guides system through systematic discovery, assessment, and updates.
+
+#### `/setup-ai-guides [mode]`
+
+**Purpose**: Bootstrap the AI guides system for your project with interactive setup
+
+**When to use**:
+- **First time setup** - When adding AI guides to your project
+- New project initialization
+- Existing project that needs guides
+
+**Modes**:
+- `interactive` (default) - Guided questions and codebase analysis
+- `auto` - Automatic tech stack detection and setup
+- `minimal` - Basic templates only, manual customization
+
+**What it does**:
+1. Analyzes your codebase to detect tech stack
+2. Selects best-matching domain example
+3. Populates templates with your project's patterns
+4. Creates directory structure
+5. Adds router integration to CLAUDE.md
+6. Installs commands (discover, assess, update)
+7. Runs first validation check
+
+**Example**:
+```
+/setup-ai-guides
+
+# Claude asks about your project
+"Is this a new project or existing codebase?"
+"What's your tech stack? (detected: React, Prisma, tRPC)"
+"Where should guides live? (default: docs/)"
+
+# Claude sets up everything
+✅ Created 4 guide files in docs/
+✅ Populated 15 concept mappings from your code
+✅ Added router to CLAUDE.md
+✅ Installed 3 maintenance commands
+✅ Validation passed
+
+# System ready to use!
+```
+
+**Run this ONCE per project.** After setup, use the maintenance commands below.
+
+---
 
 #### `/ai-guides-discover [scope]`
 
@@ -290,6 +336,15 @@ If you need to modify:
 4. Restart Claude Code if changes don't apply
 
 ## Typical Workflow
+
+### Initial Setup (One Time)
+
+```
+1. /setup-ai-guides
+2. Review generated guides
+3. Test with a sample task
+4. Customize as needed
+```
 
 ### Monthly Maintenance (1st of month)
 
