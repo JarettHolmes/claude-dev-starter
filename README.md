@@ -1,5 +1,7 @@
 # Claude Development System Starter Kit
 
+> **👋 New here?** Start with **[WALKTHROUGH.md](WALKTHROUGH.md)** - a 10-minute read that shows you exactly why this exists, how it works, and whether it's worth your time.
+
 A systematic approach to AI agent instruction management for Claude Code. Package your project patterns, documented limits, and anti-patterns into quick-reference guides that agents can consult during work—preventing errors, reducing clarifying questions, and accelerating development.
 
 ## What Is This?
