@@ -26,6 +26,43 @@ Follow this router before any action. Do not explore outside the relevant README
   - `docs/AI_CAPABILITIES_AND_LIMITS.md` - Tool limits and workarounds
 → **Key insight**: Guides are living documents - update when workflows change (monthly validation required)
 
+**IF** task involves creating detailed specification, planning complex feature, or need comprehensive implementation guide →
+→ **Use PRP methodology** for context-rich specifications
+→ **Workflow**:
+  1. Create rough outline in PRPs/in-progress/INITIAL.md
+  2. Run `/prp-create PRPs/in-progress/INITIAL.md` (auto-pulls patterns from AI guides)
+  3. Review generated PRP, add context
+  4. Run `/prp-base-execute [prp-file].md` for implementation
+→ **PRP types**:
+  - PLANNING PRP: Transform rough idea → comprehensive PRD (30-60 min)
+  - BASE PRP: Requirements → implementation with validation (1-2 hours)
+  - SPEC PRP: Transform existing code systematically (database migrations, refactors)
+  - TASK PRP: Break down complex work into checklist with validation
+→ **When to use**: Multi-file features, complex logic, need validation loops
+→ **Templates**: PRPs/in-progress/.templates/
+
+**IF** task involves looking up existing pattern, quick reference, or "how do we do X" →
+→ **Check AI Guides first** (docs/AI_DOMAIN_TRANSLATION_GUIDE.md)
+→ **Purpose**: Quick lookup for established patterns
+→ **When to use**: Simple operations, existing features, known patterns
+
+**IF** task is straightforward and pattern is clear →
+→ **Implement directly** (no PRP needed)
+→ **Consider**: After completion, run `/ai-guides-discover` to document new patterns
+
+**DECISION TREE**:
+```
+New feature request
+    ├─ Complex (multi-file, validation needed, unclear approach)
+    │  └─> Create PRP → /prp-create → Execute
+    │
+    ├─ Moderate (established pattern exists)
+    │  └─> Check AI Guides → Implement → Document pattern
+    │
+    └─ Simple (trivial, one file, obvious approach)
+       └─> Implement directly
+```
+
 [CUSTOMIZE: Add your domain-specific routing rules below]
 
 **IF** task mentions [CUSTOMIZE: domain 1 keywords - e.g., "authentication, users, sessions"] →
@@ -48,6 +85,46 @@ Follow this router before any action. Do not explore outside the relevant README
 → **Then**: `/ai-guides-assess` to score materiality (CRITICAL items = update immediately)
 → **Purpose**: Prevent guide staleness, capture patterns while fresh, systematic maintenance
 → **Don't run if**: One-off task, already documented, trivial operation (<30s impact)
+
+**INTEGRATION: PRP + AI Guides**
+
+The two systems work together:
+
+1. **Creating PRPs** (`/prp-create`):
+   - Auto-reads docs/AI_DOMAIN_TRANSLATION_GUIDE.md
+   - Pulls relevant patterns into "All Needed Context" section
+   - References known gotchas from AI guides
+   - Example: "Database approach follows AI_DOMAIN_TRANSLATION_GUIDE.md patterns"
+
+2. **Executing PRPs** (`/prp-base-execute`):
+   - References AI guides for validation commands
+   - Uses documented patterns for implementation
+   - Discovers new patterns → suggest `/ai-guides-discover` after completion
+
+3. **Updating AI Guides** (`/ai-guides-discover`):
+   - Can optionally scan PRPs/completed/ for patterns
+   - Captures learnings from PRP implementations
+   - Creates feedback loop: PRP discovers → AI Guides documents → Future PRPs reference
+
+**Workflow Example**:
+```
+Day 1: Create authentication feature
+  → /prp-create PRPs/in-progress/auth-INITIAL.md
+  → PRP auto-includes database patterns from AI guides
+  → /prp-base-execute auth-feature.md
+  → Feature completed, PRP moved to completed/
+
+Day 2: Document new patterns discovered
+  → /ai-guides-discover conversation
+  → Finds: OAuth gotcha, session storage pattern
+  → /ai-guides-assess DISC-001,DISC-002
+  → /ai-guides-update DISC-001 (CRITICAL item)
+
+Day 3: Create related feature (social login)
+  → /prp-create social-login-INITIAL.md
+  → PRP auto-includes newly documented OAuth pattern
+  → Faster implementation with documented learnings
+```
 
 **ALWAYS respect repo rules**:
 [CUSTOMIZE: Add your project-specific rules - e.g., "No secrets in git", "Always run tests before commit"]

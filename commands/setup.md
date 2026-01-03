@@ -1,6 +1,6 @@
 ---
-command: setup-ai-guides
-description: Bootstrap the AI guides system for your project with interactive setup
+command: setup
+description: Bootstrap PRP + AI Guides system
 signature: "[MODE]"
 arguments:
   - name: MODE
@@ -9,7 +9,9 @@ arguments:
     default: "interactive"
 ---
 
-Bootstrap the complete AI guides system for your project. This command helps you set up domain translation guides, capabilities documentation, and the maintenance workflow tailored to your project.
+Bootstrap the complete development system for your project, including both PRP (Product Requirement Prompts) methodology and AI Guides. This command sets up:
+- **AI Guides**: Domain translation guides, capabilities documentation, and maintenance workflow
+- **PRP System**: Workspace for creating detailed, executable specifications
 
 ## What This Command Does
 
@@ -165,6 +167,55 @@ mkdir -p [USER_SPECIFIED_PATH]/
 # AI_CAPABILITIES_AND_LIMITS.md
 # AI_GUIDES_USAGE_SUMMARY.md
 # AI_GUIDES_MAINTENANCE_PLAN.md
+```
+
+### Step 5.5: PRP Workspace Setup
+
+Create PRP workspace structure at project root:
+
+```bash
+# Create PRP directories
+mkdir -p PRPs/in-progress
+mkdir -p PRPs/completed
+mkdir -p PRPs/in-progress/.templates
+mkdir -p workspace/ai_docs
+
+# Copy PRP templates from starter kit
+cp templates/prp/*.md PRPs/in-progress/.templates/
+
+# Create PRPs README
+cat > PRPs/README.md <<'EOF'
+# Product Requirement Prompts (PRPs)
+
+This directory contains detailed specifications for feature implementation.
+
+## Structure
+- `in-progress/` - Active PRPs being worked on
+- `completed/` - Archived PRPs (successful implementations)
+- `.templates/` - PRP templates (BASE, PLANNING, SPEC, TASK)
+
+## Workflow
+1. Create INITIAL.md with rough requirements
+2. `/prp-create INITIAL.md` - Generate detailed PRP
+3. Review and enhance PRP with context
+4. `/prp-base-execute [prp-file].md` - Implement
+5. Move to completed/ when done
+
+See: docs/INTEGRATION_GUIDE.md for PRP + AI Guides workflow
+EOF
+```
+
+Show user:
+```
+✅ PRP Workspace Created!
+
+📁 Structure:
+  - PRPs/in-progress/ (active specifications)
+  - PRPs/completed/ (archived PRPs)
+  - workspace/ai_docs/ (curated documentation)
+  - PRPs/in-progress/.templates/ (4 PRP templates)
+
+🔗 Integration: PRPs will auto-reference AI Guides for patterns
 ```
 
 ### Step 6: CLAUDE.md Integration
@@ -366,6 +417,34 @@ Options:
   skip - Skip command installation
 ```
 
+### Step 7.5: PRP Commands Installation
+
+Copy PRP commands to .claude/commands/prp/:
+
+```bash
+# Create prp commands directory
+mkdir -p .claude/commands/prp
+
+# Copy all 8 PRP commands from starter kit
+cp commands/prp/*.md .claude/commands/prp/
+```
+
+Show user:
+```
+⚙️ PRP Commands Installed (8 commands):
+  - /prp-planning-create - Transform rough idea into comprehensive PRD
+  - /prp-create - Generate detailed PRP from requirements
+  - /prp-base-execute - Execute BASE PRP with validation loops
+  - /prp-spec-execute - Execute SPEC PRP for transformations
+  - /prp-task-execute - Execute TASK PRP from checklists
+  - /task-list-init - Create task checklists
+  - /api-contract-define - Define API contracts
+  - /read-docs - Load project context documents
+```
+
+Update command count:
+- **Total installed**: 12 commands (4 AI guides + 8 PRP) or 20 commands (4 AI guides + 8 PRP + 8 development)
+
 ### Step 8: Validation
 
 Run initial validation:
@@ -385,21 +464,21 @@ Show validation results and next steps.
 After completion, show summary:
 
 ```
-✅ AI Guides System Setup Complete!
+✅ Complete Development System Setup!
 
-📁 Location: docs/
-📊 Guides Created:
-  - AI_DOMAIN_TRANSLATION_GUIDE.md (15 concept mappings, 3 anti-patterns)
-  - AI_CAPABILITIES_AND_LIMITS.md (empty - populate as you discover limits)
-  - AI_GUIDES_USAGE_SUMMARY.md
-  - AI_GUIDES_MAINTENANCE_PLAN.md
+📚 Two Systems Installed:
 
-🔗 Router: Added to CLAUDE.md (lines 1-15)
+1. AI Guides System (Pattern Knowledge)
+   📁 docs/ - 4 guide files
+   ⚙️ Commands: /ai-guides-discover, assess, update
+   🎯 Purpose: Document existing patterns, prevent repetitive questions
 
-⚙️  Commands: Installed 3 AI guides commands to .claude/commands/ai-guides/
-  - /ai-guides-discover
-  - /ai-guides-assess
-  - /ai-guides-update
+2. PRP System (Specification Execution)
+   📁 PRPs/ - Workspace for specifications
+   ⚙️ Commands: /prp-create, /prp-base-execute, /prp-planning-create, etc.
+   🎯 Purpose: Create detailed, executable specifications
+
+🔗 Integration: PRPs auto-reference AI Guides for project patterns
 
 🎯 Tech Stack Detected:
   - React 18.2 with TypeScript
@@ -412,31 +491,29 @@ After completion, show summary:
   ⚠️  Translation Guide: 15 mappings (minimum: 15) ✅
   ⚠️  Translation Guide: 3 anti-patterns (minimum: 5) - Add 2 more
   ✅  All internal links valid
+  ✅  PRP workspace structure complete
 
-🚀 Next Steps:
+🚀 Quick Start:
 
-1. Review the generated guides in docs/
-2. Add 2 more anti-patterns from your experience
-3. Test the system:
-   - Ask me: "Add a database query to fetch all active users"
-   - I should reference the guide and use your Prisma pattern
+Option A: Document Existing Pattern (AI Guides)
+  1. Complete some work
+  2. /ai-guides-discover conversation
+  3. /ai-guides-assess all
+  4. /ai-guides-update [critical-items]
 
-4. Monthly maintenance (set reminder for 1st of month):
-   /ai-guides-discover recent
-   /ai-guides-assess [discovered-items]
-   /ai-guides-update [critical-items]
+Option B: Build New Feature (PRP)
+  1. Create PRPs/in-progress/INITIAL.md with rough idea
+  2. /prp-create PRPs/in-progress/INITIAL.md
+  3. Review generated PRP (will include AI Guide patterns)
+  4. /prp-base-execute [generated-prp].md
 
-5. After completing work, run:
-   /ai-guides-discover conversation
-
-📚 Learn More:
-  - Setup details: docs/AI_GUIDES_USAGE_SUMMARY.md
-  - Maintenance workflow: docs/AI_GUIDES_MAINTENANCE_PLAN.md
-  - Validation: bash tools/validate_ai_guides.sh docs/
+📚 Learn More: docs/INTEGRATION_GUIDE.md
 
 ---
 
-Try it now! Ask me to implement something using your tech stack and watch me reference the guides.
+Try it now!
+- For quick lookup: Ask me about existing patterns (I'll check AI guides)
+- For new feature: Create a PRP and I'll build with validation loops
 ```
 
 ## Error Handling
