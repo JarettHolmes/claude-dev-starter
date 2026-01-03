@@ -1,8 +1,10 @@
 # Setup Guide
 
-Complete step-by-step instructions for setting up the Claude Development System on your project.
+Complete instructions for setting up the Claude Development System on your project.
 
-**Time estimate**: <30 minutes for basic setup, 2-3 hours to fully customize guides
+**Choose your approach:**
+- **Quick Start (Recommended)**: ~10 minutes with automated setup
+- **Manual Setup (Advanced)**: 30 minutes to 2 hours for full customization
 
 ## Prerequisites
 
@@ -12,7 +14,78 @@ Before starting, ensure you have:
 - **Bash** (for running validation script)
 - Your project's codebase accessible
 
-## Installation (Step-by-Step)
+---
+
+## Quick Start (Automated Setup)
+
+**Time estimate**: ~10 minutes
+
+This is the recommended approach. Claude Code analyzes your project and sets everything up automatically.
+
+### Step 1: Install Commands
+
+```bash
+# Copy commands to your project
+cp -r commands/ /path/to/your/project/.claude/commands/
+
+# Restart Claude Code to load commands
+```
+
+### Step 2: Run Automated Setup
+
+Open Claude Code in your project and run:
+
+```
+/setup-ai-guides
+```
+
+Claude will:
+1. **Analyze your codebase**
+   - Detect tech stack (frameworks, databases, tools)
+   - Find actual patterns in your code
+   - Identify common operations
+
+2. **Populate templates**
+   - Fill in concept mappings with your patterns
+   - Add detected tech stack to CLAUDE.md
+   - Create routing rules based on your project
+
+3. **Set up structure**
+   - Create `docs/` directory with 4 guide files
+   - Add router integration to CLAUDE.md
+   - Run validation
+
+4. **Show summary**
+   ```
+   ✅ AI Guides System Setup Complete!
+
+   📁 Location: docs/
+   📊 Guides Created: 4 files
+   🔗 Router: Added to CLAUDE.md
+   🎯 Tech Stack Detected: React, Prisma, tRPC...
+
+   🚀 Next Steps: Review guides and test the system
+   ```
+
+### Step 3: Review and Test
+
+1. **Review generated guides** in `docs/`
+2. **Test the system**:
+   ```
+   Ask Claude: "Add a database query to fetch all active users"
+   Claude should reference your guide and use your detected patterns
+   ```
+3. **Customize** if needed (add more anti-patterns, refine mappings)
+
+**Done!** Your system is ready to use.
+
+---
+
+## Manual Setup (Advanced)
+
+**Time estimate**: 30 minutes to 2 hours
+
+Use this approach if you want full control over every detail, or if you're setting up for a new project without existing code.
 
 ### Step 1: Clone Repository
 

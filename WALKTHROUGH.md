@@ -210,9 +210,35 @@ Prevents guide rot. Keeps quality high.
 
 ---
 
-## The 30-Minute Setup (What You Actually Do)
+## The 10-Minute Setup (Automated - Recommended)
 
-Here's the actual work:
+Here's the actual work with Claude's help:
+
+**Step 1** (2 min): Copy commands to your project
+```bash
+cp -r commands/ /path/to/your/project/.claude/commands/
+```
+
+**Step 2** (8 min): Let Claude do the rest
+```
+/setup-ai-guides
+```
+
+Claude will:
+- Scan your codebase and detect tech stack (React, Prisma, tRPC, etc.)
+- Find actual patterns in your code (database queries, API calls, etc.)
+- Populate templates with your project's patterns
+- Create CLAUDE.md with routing logic
+- Set up directory structure
+- Run validation
+
+**Done.** 10 minutes total, mostly automated.
+
+---
+
+## The Manual Alternative (30 Minutes)
+
+If you prefer full control:
 
 **Step 1** (2 min): Clone repo
 ```bash
@@ -232,13 +258,16 @@ cd claude-dev-starter
 - Copy-paste patterns from the example
 - Add 2-3 anti-patterns your team already knows about
 
-**Step 4** (5 min): Copy commands to your project
+**Step 4** (5 min): Copy to your project
 ```bash
+cp templates/*.md /path/to/your/project/docs/
 cp -r commands/ /path/to/your/project/.claude/commands/
 ```
 
-**Step 5** (3 min): Add router to your CLAUDE.md
+**Step 5** (3 min): Create CLAUDE.md with router
 ```markdown
+# AGENT ROUTER (EXECUTE FIRST)
+
 **IF** task involves database/API/state →
 → **Read `docs/AI_DOMAIN_TRANSLATION_GUIDE.md` FIRST**
 ```
@@ -280,7 +309,7 @@ Total time: 30 seconds, zero questions
 
 ## One More Thing - The Commands Are Gold
 
-Even if you don't use the guides, the 11 commands are worth cloning:
+Even if you don't use the guides, the 12 commands are worth cloning:
 
 ```bash
 /smart-commit     # Analyzes git diff, writes intelligent commit message
