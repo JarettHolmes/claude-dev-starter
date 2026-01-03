@@ -18,7 +18,7 @@ Before starting, ensure you have:
 
 ```bash
 git clone [URL]
-cd claude-dev-system-starter
+cd claude-dev-starter
 ```
 
 ### Step 2: Choose Your Domain Example

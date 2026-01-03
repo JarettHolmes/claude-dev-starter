@@ -18,8 +18,8 @@ Use GitHub Issues for:
 1. **Fork the repository**
    ```bash
    # Click "Fork" on GitHub
-   git clone https://github.com/YOUR_USERNAME/claude-dev-system-starter.git
-   cd claude-dev-system-starter
+   git clone https://github.com/YOUR_USERNAME/claude-dev-starter.git
+   cd claude-dev-starter
    ```
 
 2. **Create a feature branch**

@@ -17,7 +17,7 @@ This starter kit provides a **living documentation system** that sits between yo
 1. **Clone this repository**
    ```bash
    git clone [URL]
-   cd claude-dev-system-starter
+   cd claude-dev-starter
    ```
 
 2. **Copy commands to your project**
@@ -90,7 +90,7 @@ Each includes concept mappings, anti-patterns, and capability limits.
 ## Directory Structure
 
 ```
-claude-dev-system-starter/
+claude-dev-starter/
 ├── templates/              # 4 guide templates with [CUSTOMIZE] markers
 │   ├── AI_DOMAIN_TRANSLATION_GUIDE.md
 │   ├── AI_CAPABILITIES_AND_LIMITS.md

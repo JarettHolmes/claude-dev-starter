@@ -217,7 +217,7 @@ Here's the actual work:
 **Step 1** (2 min): Clone repo
 ```bash
 git clone [URL]
-cd claude-dev-system-starter
+cd claude-dev-starter
 ```
 
 **Step 2** (5 min): Pick your example
